@@ -73,7 +73,7 @@ pub fn create_cargo_toml(packageName: &str) {
     code.push_str("bincode = \"1.2.1\" \n");
     code.push_str("serde_yaml = \"0.8\" \n");
     code.push_str("vpp-api-encoding = {git=\"https://github.com/ayourtch/vpp-api-encoding\", branch=\"main\" } \n");
-    code.push_str("vpp-api-transport = { git=\"https://github.com/ayourtch/vpp-api-transport/\", branch=\"main\" } \n");
+    code.push_str("vpp-api-transport = { version = \"0.1.4\" } \n");
     code.push_str("lazy_static = \"1.4.0\" \n");
     code.push_str("regex = \"1\" \n");
     code.push_str("syn ={ version= \"1.0\", features=[\"extra-traits\",\"full\"]} \n");
