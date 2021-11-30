@@ -60,12 +60,24 @@ fn main() {
     println!("{:?}", create_host_interface);
 
     // Step 4: Set Host Interface State up
-    let set_interface_link_up: SwInterfaceSetFlagsReply = send_recv_msg(
-        &SwInterfaceSetFlags::get_message_name_and_crc(),
-        &SwInterfaceSetFlags::builder().client_index(t.get_client_index()).context(0).sw_if_index(1).flags(vec![IfStatusFlags::IF_STATUS_API_FLAG_ADMIN_UP, IfStatusFlags::IF_STATUS_API_FLAG_LINK_UP].try_into().unwrap()).build().unwrap(),
+    let set_interface_link_up: SwInterfaceSetFlagsReply = send_recv_one(
+        &SwInterfaceSetFlags::builder()
+            .client_index(t.get_client_index())
+            .context(0)
+            .sw_if_index(1)
+            .flags(
+                vec![
+                    IfStatusFlags::IF_STATUS_API_FLAG_ADMIN_UP,
+                    IfStatusFlags::IF_STATUS_API_FLAG_LINK_UP,
+                ]
+                .try_into()
+                .unwrap(),
+            )
+            .build()
+            .unwrap(),
         &mut *t,
-        &SwInterfaceSetFlagsReply::get_message_name_and_crc());
-    
+    );
+
     println!("{:?}", create_host_interface);
 
     // Step 5: Assign IP Address to Host Interface
@@ -79,7 +91,7 @@ fn main() {
             prefix: AddressWithPrefix {
                 address: Address {
                     af: AddressFamily::ADDRESS_IP4,
-                    un: AddressUnion::new_Ip4Address([10,10,1,2]),
+                    un: AddressUnion::new_Ip4Address([10, 10, 1, 2]),
                 },
                 len: 24,
             },

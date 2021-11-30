@@ -43,8 +43,7 @@ local0 (dn):
 ## Example Message 
 Sending a message to VPP without using a builder, using low level function:
 ```rust 
-let create_interface: SwInterfaceAddDelAddressReply = send_recv_msg(
-        &SwInterfaceAddDelAddress::get_message_name_and_crc(),
+let create_interface: SwInterfaceAddDelAddressReply = send_recv_one(
         &SwInterfaceAddDelAddress {
             client_index: t.get_client_index(),
             context: 0,
@@ -60,14 +59,12 @@ let create_interface: SwInterfaceAddDelAddressReply = send_recv_msg(
             },
         },
         &mut *t,
-        &SwInterfaceAddDelAddressReply::get_message_name_and_crc(),
     );
 ```
 
 Sending a message to VPP using a builder 
 ```rust
-let create_host_interface: CliInbandReply = send_recv_msg(
-        &CliInband::get_message_name_and_crc(),
+let create_host_interface: CliInbandReply = send_recv_one(
         &CliInband::builder()
             .client_index(t.get_client_index())
             .context(0)
@@ -75,7 +72,6 @@ let create_host_interface: CliInbandReply = send_recv_msg(
             .build()
             .unwrap(),
         &mut *t,
-        &CliInbandReply::get_message_name_and_crc(),
     );
 ```
 
